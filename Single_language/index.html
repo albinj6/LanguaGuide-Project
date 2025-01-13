@@ -103,6 +103,8 @@
         // Parse JSON response
         const data = await response.json();
 
+        userMessageDiv.innerHTML =`${message}<br>${data.input_spanish}`;
+        chatBox.appendChild(userMessageDiv);
         // Display chatbot's response
         const botMessageDiv = document.createElement("div");
         botMessageDiv.classList.add("message", "bot-message");

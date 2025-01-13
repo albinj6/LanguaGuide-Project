@@ -45,8 +45,9 @@ class BilingualChatbot:
         
         bot_response_in_english = self.chat_tokenizer.decode(self.chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
         bot_response_in_spanish = self.translator.translate(bot_response_in_english, direction="en_to_es")
+        user_input_in_spanish = self.translator.translate(user_input,direction="en_to_es")
         
-        return bot_response_in_spanish, bot_response_in_english
+        return bot_response_in_spanish, bot_response_in_english, user_input_in_spanish
 
 chatbot = BilingualChatbot()
 
@@ -58,11 +59,12 @@ def chat():
     if not user_input:
         return jsonify({"error": "Empty message"}), 400
 
-    response_spanish, response_english = chatbot.get_response(user_input)
+    response_spanish, response_english, input_spanish = chatbot.get_response(user_input)
     
     return jsonify({
         "response_spanish": response_spanish,
-        "response_english": response_english
+        "response_english": response_english,
+        "input_spanish": input_spanish
     })
 
 
