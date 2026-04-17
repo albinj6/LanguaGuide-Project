@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Auth: Sign-Up & Sign-In</title>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.18.0/firebase-auth-compat.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+        #container {
+            width: 400px;
+            padding: 50px;
+            border-radius: 8px;
+            background-color: #ffffff;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        input[type="email"], input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .google-btn {
+            background-color: #db4437;
+        }
+        .google-btn:hover {
+            background-color: #a33527;
+        }
+        .switch {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .switch a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .switch a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h2 id="form-title">Sign In</h2>
+        <input type="email" id="email" placeholder="Enter your email" />
+        <input type="password" id="password" placeholder="Enter your password" />
+        <button id="action-btn">Sign In</button>
+        <p style="text-align: center;">OR</p>
+        <button class="google-btn" id="google-signin-btn">Sign In with Google</button>
+        <p id="error-message" style="color: red; text-align: center; margin-top: 10px;"></p>
+        <p class="switch">
+            <span id="switch-text">Don't have an account?</span>
+            <a href="#" id="switch-link">Sign Up</a>
+        </p>
+    </div>
+
+    <script>
+        // Firebase Configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDUUPesRAPgBFZVEqAxTwSEgkSGLIL2x9s",
+            authDomain: "languaguide.firebaseapp.com",
+            projectId: "languaguide",
+            storageBucket: "languaguide.firebasestorage.app",
+            messagingSenderId: "510777253218",
+            appId: "1:510777253218:web:232344fd963195d216203b",
+            measurementId: "G-4FX8REEEV5"
+        };
+    
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+    
+        let isSignUpMode = false;
+    
+        // Switch between Sign-In and Sign-Up
+        document.getElementById("switch-link").addEventListener("click", () => {
+            isSignUpMode = !isSignUpMode;
+            document.getElementById("form-title").textContent = isSignUpMode ? "Sign Up" : "Sign In";
+            document.getElementById("action-btn").textContent = isSignUpMode ? "Sign Up" : "Sign In";
+            document.getElementById("switch-text").textContent = isSignUpMode ? "Already have an account?" : "Don't have an account?";
+            document.getElementById("switch-link").textContent = isSignUpMode ? "Sign In" : "Sign Up";
+        });
+    
+        // Handle Sign-In and Sign-Up
+        document.getElementById("action-btn").addEventListener("click", async () => {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("error-message");
+
+            try {
+                if (isSignUpMode) {
+                    // Sign-Up
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                    const userEmail = userCredential.user.email;
+
+                    // Store email in localStorage before redirecting
+                    localStorage.setItem("userEmail", userEmail);
+
+                    alert(`Account created successfully! Welcome, ${userEmail}`);
+                    window.location.href = "user.html"; // Redirect to user.html
+                } else {
+                    // Sign-In
+                    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+                    alert(`Welcome back, ${userCredential.user.email}`);
+                }
+
+                // ✅ Store user details in localStorage
+                localStorage.setItem("userEmail", userCredential.user.email);
+                localStorage.setItem("userName", userCredential.user.displayName || "User");
+
+                // ✅ Redirect to dashboard.html
+                window.location.href = "dashboard.html";
+
+                errorMessage.textContent = "";
+            } catch (error) {
+                errorMessage.textContent = error.message;
+            }
+        });
+
+    
+        // Sign in with Google
+        const provider = new firebase.auth.GoogleAuthProvider();
+    
+        document.getElementById("google-signin-btn").addEventListener("click", () => {
+            auth.signInWithPopup(provider)
+                .then((result) => {
+                    const user = result.user;
+                    alert(`Welcome ${user.displayName}!`);
+                        // ✅ Store user details in localStorage
+                    localStorage.setItem("userEmail", user.email);
+                    localStorage.setItem("userName", user.displayName || "User");
+
+                    // ✅ Redirect to dashboard.html
+                    window.location.href = "dashboard.html";
+                })
+                .catch((error) => {
+                    console.error("Error during sign-in:", error);
+                });
+        });
+    </script>
+    
+    
+</body>
+</html>

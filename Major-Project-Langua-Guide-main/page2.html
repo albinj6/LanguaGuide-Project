@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .top-bar {
+            background-color: #1E2A38;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .language-container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #1E2A38;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 88.3%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .flags-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .flag-item {
+            text-align: center;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .flag-item img {
+            width: 56px;
+            height: 37px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .flag-item p {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Highlight the selected option */
+        .flag-item.selected {
+            background-color: #5cd160;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .continue-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .continue-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Languaguide</div>
+    </div>
+
+    <div class="language-container">
+        <h2>Which language do you want to learn?</h2>
+        <input type="text" id="searchBox" class="search-box" placeholder="Search for a language...">
+
+        <div class="flags-container" id="flagsContainer">
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/in.png" alt="Malayalam">
+                <p>Malayalam</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/es.png" alt="Spanish">
+                <p>Spanish</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/in.png" alt="Hindi">
+                <p>Hindi</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/us.png" alt="English">
+                <p>English</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/de.png" alt="German">
+                <p>German</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/it.png" alt="Italian">
+                <p>Italian</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/pt.png" alt="Portuguese">
+                <p>Portuguese</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/jp.png" alt="Japanese">
+                <p>Japanese</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/cn.png" alt="Chinese">
+                <p>Chinese</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/kr.png" alt="Korean">
+                <p>Korean</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/ae.png" alt="Arabic">
+                <p>Arabic</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/no.png" alt="Norwegian">
+                <p>Norwegian</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/gr.png" alt="Greek">
+                <p>Greek</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/il.png" alt="Hebrew">
+                <p>Hebrew</p>
+            </div>
+            <div class="flag-item" onclick="selectLanguage(this)">
+                <img src="https://flagcdn.com/w40/fi.png" alt="Finnish">
+                <p>Finnish</p>
+            </div>
+        </div>
+
+        <button class="continue-button">Continue</button>
+    </div>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", () => {
+            let selectedLanguage = "";
+            const userEmail = localStorage.getItem("userEmail"); // Retrieve user email
+
+            document.querySelectorAll(".flag-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    document.querySelectorAll(".flag-item").forEach(el => el.classList.remove("selected"));
+                    this.classList.add("selected");
+                    selectedLanguage = this.querySelector("p").innerText;
+                });
+            });
+
+            document.querySelector(".continue-button").addEventListener("click", async () => {
+                if (!selectedLanguage) {
+                    alert("Please select a language before continuing.");
+                    return;
+                }
+
+                const response = await fetch("http://localhost:3000/save-language", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: userEmail, language: selectedLanguage }),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert("Language selection saved!");
+                    window.location.href = "level.html"; // Redirect to next page
+                } else {
+                    alert("Error: " + result.error);
+                }
+            });
+        });
+        </script>
+</body>
+</html>

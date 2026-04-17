@@ -1,0 +1,33 @@
+const form = document.querySelector('.info-form');
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = {
+        name: document.getElementById('name').value,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value,
+         country: document.getElementById('country').value,
+        age: document.getElementById('age').value
+    };
+
+    try {
+        const response = await fetch('/submit-form', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+            alert('Form submitted successfully!');
+            form.reset();
+        } else {
+            alert('Failed to submit the form.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('An error occurred while submitting the form.');
+    }
+});

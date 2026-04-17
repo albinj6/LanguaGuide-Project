@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .top-bar {
+            background-color: #1E2A38;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .top-bar .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar .icons i {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .language-container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 50px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        h2 {
+            color: #1E2A38;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+
+        .continue-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .continue-button:hover {
+            background-color: #45a049;
+        }
+
+        .login-link {
+            display: block;
+            margin-top: 10px;
+            color: #007BFF;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .login-link:hover {
+            text-decoration: underline;
+        }
+
+        .level-container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .level-container h3 {
+            color: #1E2A38;
+            margin-bottom: 20px;
+        }
+
+        .levels {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .level-item {
+            height: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition:  transform 0.3s, background-color 0.3s ease;
+        }
+        .level-item.selected {
+            background-color: #5cd160;
+            color: #1E2A38;
+            border-radius: 5px;
+        }
+
+        .level-item:hover {
+            background-color: #ffffff;
+            transform: scale(1.02);
+        }
+
+        .level-item .details {
+            text-align: right;
+        }
+     
+
+        .details span {
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Languaguide</div>
+        <!-- <div class="icons">
+            <i class="fas fa-bell" title="Notifications"></i>
+            <i class="fas fa-calendar-alt" title="Calendar"></i>
+            <i class="fas fa-sign-out-alt" title="Sign Out"></i>
+        </div> -->
+    </div>
+
+    <div class="level-container">
+        <h3>What is your Level of Knowledge?</h3>
+        <p>We will personalize conversations based on your language level.</p>
+
+        <div class="levels">
+            <div class="level-item"  onclick="selectLevel(this)">
+                <div class="details">
+                    <strong>Beginner</strong>
+                </div>
+            </div>
+            <div class="level-item" onclick="selectLevel(this)">
+                <div class="details">
+                    <strong>Intermediate</strong>
+                </div>
+            </div>
+            <div class="level-item" onclick="selectLevel(this)">
+                <div class="details">
+                    <strong>Advanced</strong>
+                </div>
+            </div>
+        </div>
+        <br><br>
+        <button class="continue-button">Continue</button>
+    </div>
+    <script>
+         document.addEventListener("DOMContentLoaded", () => {
+        let selectedLevel = "";
+        const userEmail = localStorage.getItem("userEmail");
+
+        document.querySelectorAll(".level-item").forEach(item => {
+            item.addEventListener("click", function () {
+                document.querySelectorAll(".level-item").forEach(el => el.classList.remove("selected"));
+                this.classList.add("selected");
+                selectedLevel = this.querySelector("strong").innerText;
+            });
+        });
+
+        document.querySelector(".continue-button").addEventListener("click", async () => {
+            if (!selectedLevel) {
+                alert("Please select a level before continuing.");
+                return;
+            }
+
+            const response = await fetch("http://localhost:3000/save-level", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: userEmail, level: selectedLevel }),
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                alert("Level saved!");
+                window.location.href = "achieve.html";
+            } else {
+                alert("Error: " + result.error);
+            }
+        });
+    });
+    </script>
+</body>
+</html>

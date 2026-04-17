@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games | LanguaGuide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="bg-white w-64 h-screen shadow-md">
+            <div class="p-6 text-center">
+                <div class="text-2xl font-bold flex items-center justify-center">
+                    <span>LanguaGuide</span>
+                </div>
+            </div>
+            <nav class="mt-8">
+                <ul>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="dashboard.html" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/dashboard-layout.png" class="h-6 w-6 mr-2"> Dashboard
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="explore.html" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/compass.png" class="h-6 w-6 mr-2"> Explore
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="progress.html" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/combo-chart.png" class="h-6 w-6 mr-2"> Progress
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 bg-blue-100 rounded-lg my-2">
+                        <a href="games.html" class="flex items-center text-blue-600 font-semibold">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/controller.png" class="h-6 w-6 mr-2"> Games
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="account.html" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/user-male-circle.png" class="h-6 w-6 mr-2"> Account
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="help.html" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/help.png" class="h-6 w-6 mr-2"> Help
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-semibold">Choose Your Game</h1>
+            </header>
+
+            <!-- Games Selection Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Game 1 -->
+                <div class="card bg-white p-6 flex flex-col items-center">
+                    <img src="https://img.icons8.com/fluency/96/000000/word.png" class="mb-4" />
+                    <h2 class="text-xl font-bold">Word Match</h2>
+                    <p class="text-gray-600 text-sm mt-2 text-center">Test your vocabulary by matching words with their correct meanings.</p>
+                    <button onclick="window.location.href='game2.html'" class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Play Now
+                    </button>
+                    
+                </div>
+
+                <!-- Game 2 -->
+                <div class="card bg-white p-6 flex flex-col items-center">
+                    <img src="https://img.icons8.com/fluency/96/000000/speech-bubble.png" class="mb-4" />
+                    <h2 class="text-xl font-bold">Pronunciation Challenge</h2>
+                    <p class="text-gray-600 text-sm mt-2 text-center">Improve your pronunciation by repeating words after hearing them.</p>
+                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Play Now
+                    </button>
+                </div>
+
+                <!-- Game 3 -->
+                <div class="card bg-white p-6 flex flex-col items-center">
+                    <img src="https://img.icons8.com/fluency/96/000000/question-mark.png" class="mb-4" />
+                    <h2 class="text-xl font-bold">Grammar Quiz</h2>
+                    <p class="text-gray-600 text-sm mt-2 text-center">Challenge yourself with fun and interactive grammar quizzes.</p>
+                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Play Now
+                    </button>
+                </div>
+
+                <!-- Game 4 -->
+                <div class="card bg-white p-6 flex flex-col items-center">
+                    <img src="https://img.icons8.com/fluency/96/000000/conversation.png" class="mb-4" />
+                    <h2 class="text-xl font-bold">Conversation Practice</h2>
+                    <p class="text-gray-600 text-sm mt-2 text-center">Engage in AI-powered conversations and practice speaking fluently.</p>
+                    <button class="mt-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
+                        Play Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

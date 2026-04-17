@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Selection</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        .top-bar {
+            background-color: #1E2A38;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .top-bar .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar .icons i {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .achievement-container {
+            background-color: #fff;
+            width: 90%;
+            max-width: 600px;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .achievement-container h3 {
+            color: #1E2A38;
+            margin-bottom: 20px;
+        }
+
+        .achievement-item {
+            height: 30px;
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: transform 0.3s, background-color 0.3s ease;
+        }
+        .achievement-item.selected {
+            background-color: #5cd160;
+            color: #1E2A38;
+            border-radius: 5px;
+        }
+   
+
+        .achievement-item:hover {
+            background-color: #f9f9f9;
+            transform: scale(1.02);
+        }
+
+        .achievement-item img {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            border-radius: 5px;
+            animation: float 2s ease-in-out infinite;
+        }
+
+
+        .achievement-item span {
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .achievement-item p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .continue-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .continue-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Languaguide</div>
+        <!-- <div class="icons">
+            <i class="fas fa-bell" title="Notifications"></i>
+            <i class="fas fa-calendar-alt" title="Calendar"></i>
+            <i class="fas fa-sign-out-alt" title="Sign Out"></i>
+        </div> -->
+    </div>
+
+    <div class="achievement-container">
+        <h3>What are you looking to achieve?</h3>
+
+        <div class="achievement-item" onclick="selectAchievement(this)">
+            <img src="https://via.placeholder.com/50?text=📚" alt="📚">
+            <div>
+                <span>I want to learn basics</span>
+            </div>
+        </div>
+
+        <div class="achievement-item" onclick="selectAchievement(this)">
+            <img src="https://via.placeholder.com/50?text=🎤" alt="🎤">
+            <div>
+                <span>I want to improve speaking</span>
+            </div>
+        </div>
+
+        <div class="achievement-item" onclick="selectAchievement(this)">
+            <img src="https://via.placeholder.com/50?text=💬" alt="💬">
+            <div>
+                <span>I want to become fluent</span>
+            </div>
+        </div>
+
+        <div class="achievement-item" onclick="selectAchievement(this)">
+            <img src="https://via.placeholder.com/50?text=❓" alt="❓">
+            <div>
+                <span>I'm not sure yet</span>
+            </div>
+        </div>
+
+        <button class="continue-button">Continue</button>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            let selectedAchievement = "";
+            const userEmail = localStorage.getItem("userEmail");
+    
+            document.querySelectorAll(".achievement-item").forEach(item => {
+                item.addEventListener("click", function () {
+                    document.querySelectorAll(".achievement-item").forEach(el => el.classList.remove("selected"));
+                    this.classList.add("selected");
+                    selectedAchievement = this.querySelector("span").innerText;
+                });
+            });
+    
+            document.querySelector(".continue-button").addEventListener("click", async () => {
+                if (!selectedAchievement) {
+                    alert("Please select an achievement before continuing.");
+                    return;
+                }
+    
+                const response = await fetch("http://localhost:3000/save-achievement", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email: userEmail, achievement: selectedAchievement }),
+                });
+    
+                const result = await response.json();
+                if (response.ok) {
+                    alert("Achievement saved! You have completed the process.");
+                    window.location.href = "dashboard.html";
+                } else {
+                    alert("Error: " + result.error);
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

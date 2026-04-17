@@ -1,0 +1,124 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.card {
+    display: flex;
+    width: 1000px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.left {
+    background: linear-gradient(to right, #5b4599, #feb47b);
+    padding: 30px;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    flex: 1;
+}
+
+.left img {
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.left h2 {
+    margin: 10px 0;
+    color: black;
+}
+
+.left a {
+    color: black;
+    font-size: 20px;
+    text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.right {
+    padding: 20px;
+    flex: 2;
+}
+
+.right h3 {
+    margin-top: 0;
+}
+
+.right p {
+    margin: 10px 0;
+}
+
+.right .social-icons {
+    display: flex;
+    margin-top: 20px;
+}
+
+.right .social-icons a {
+    margin-right: 20px;
+    align-items: right 100%;
+}
+
+.right .social-icons img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+.info-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-form input {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.save-button {
+    padding: 10px 20px;
+    background-color: #ff7e5f;
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    align-self: flex-start;
+}
+
+.save-button:hover {
+    background-color: #feb47b;
+}
+select {
+    width: 84%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: white;
+    appearance: none; /* Remove the default arrow in some browsers */
+}
+
+select:focus {
+    border-color: #ff7e5f;
+    outline: none;
+    box-shadow: 0 0 5px rgba(255, 126, 95, 0.5);
+}
+select option:disabled {
+    color: #888; /* Light gray text for placeholder */
+}

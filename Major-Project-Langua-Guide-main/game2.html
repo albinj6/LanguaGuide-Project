@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble Game</title>
+    <link rel="stylesheet" href="game2.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Word Scramble Game</h1>
+        <label for="language">Select Language:</label>
+        <select id="language">
+            <option value="">Choose a language</option>
+            <option value="hindi">Hindi</option>
+            <option value="malayalam">Malayalam</option>
+            <option value="spanish">Spanish</option>
+        </select>
+
+        <p id="scrambledWord">Scrambled Word: </p>
+        
+        <select id="options">
+            <option value="">Select the correct word</option>
+        </select>
+
+        <button onclick="checkAnswer()">Check Answer</button>
+        <button onclick="loadNewWord()">New Word</button>
+
+        <p id="message"></p>
+    </div>
+    <script src="game2.js"></script>
+</body>
+</html>

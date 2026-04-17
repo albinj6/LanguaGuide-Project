@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegant Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex">
+        <!-- Sidebar -->
+        <aside class="bg-white w-64 h-screen shadow-md">
+            <div class="p-6 text-center">
+                <div class="text-2xl font-bold flex items-center justify-center">
+                    <span>LanguaGuide</span>
+                </div>
+            </div>
+            <nav class="mt-8">
+                <ul>
+                    <li class="px-6 py-3 bg-blue-100 rounded-lg my-2">
+                        <a href="#" class="flex items-center text-blue-600 font-semibold">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/dashboard-layout.png" class="h-6 w-6 mr-2" alt="Dashboard Icon"> Dashboard
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="#" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/compass.png" class="h-6 w-6 mr-2" alt="Explore Icon"> Explore
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="#" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/combo-chart.png" class="h-6 w-6 mr-2" alt="Progress Icon"> Progress
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="games.html" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/controller.png" class="h-6 w-6 mr-2" alt="Games Icon"> Games
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="#" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/user-male-circle.png" class="h-6 w-6 mr-2" alt="Account Icon"> Account
+                        </a>
+                    </li>
+                    <li class="px-6 py-3 hover:bg-gray-200 rounded-lg">
+                        <a href="#" class="flex items-center">
+                            <img src="https://img.icons8.com/material-outlined/24/000000/help.png" class="h-6 w-6 mr-2" alt="Help Icon"> Help
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+            <header class="flex justify-between items-center mb-8">
+                <h1 class="text-3xl font-semibold">Welcome, Learner!</h1>
+            </header>
+
+            <!-- Two Separate Cards Section -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <!-- Hello Adona Card -->
+                <div class="card bg-blue-500 text-white p-6">
+                    <h2 class="text-2xl font-bold">Hello, <span id="user-name">Learner</span>!</h2>
+
+                    <p class="mt-2">Have you tried our Explore tab? We have a daily pick ready for you.</p>
+                    <a href="#" class="mt-4 inline-block text-white underline">See your daily pick</a>
+                </div>
+                <!-- Level Card -->
+                <div class="card bg-green-500 text-white p-6">
+                    <h2 class="text-2xl font-bold">You are Level 1</h2>
+                    <p class="mt-2">Practice 5 more minutes in any of the modes and you will reach Level 2.</p>
+                    <a href="#" class="mt-4 inline-block text-white underline">View your stats</a>
+                </div>
+            </div>
+<!-- Master Key Card -->
+<div class="grid grid-cols-1">
+    <div class="card bg-blue-50 p-8 w-full flex items-start justify-between">
+        <div>
+            <h2 class="text-xl font-semibold">Chatbot</h2>
+            <p class="text-gray-700 mt-2">Enhance your language skills by chatting with our AI Mentor.</p>
+        </div>
+        <img src="image.png" class="rounded-lg w-48 h-48 object-cover">
+    </div>
+</div>
+
+
+
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const userName = localStorage.getItem("userName") || "Learner"; // Default fallback
+            document.getElementById("user-name").innerText = userName; // ✅ Update dynamically
+        });
+
+    </script>
+</body>
+</html>

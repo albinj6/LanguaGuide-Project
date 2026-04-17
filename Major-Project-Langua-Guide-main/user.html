@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            /* background:#feb47b; */
+            color: #000000;
+        }
+        .top-bar {
+            background-color: #1E2A38;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+        }
+
+        .top-bar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        
+        .top-bar .icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .top-bar .icons i {
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+        .fa-solid, .fas {
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0);
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            margin-left: 20px;
+        }
+
+        input, select {
+            width: 90.6%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-left: 15px;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        select#country {
+             width: 94.5%;
+        }
+    
+        .radio-group, .checkbox-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .radio-group input, .checkbox-group input {
+            margin: 0;
+            box-shadow: 0 2px 5px rgba(253, 253, 253, 0.986);;
+            transform: scale(1.2);
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            background: #4CAF50;
+            color: #fffbfb;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 15px;
+            margin-right: 15px;
+
+        }
+
+        button:hover {
+            background: #269748;
+        }
+
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="logo">Languaguide</div>
+        <div class="icons">
+            <i class="fas fa-bell" title="Notifications"></i>
+            <i class="fas fa-calendar-alt" title="Calendar"></i>
+            <i class="fas fa-sign-out-alt" title="Sign Out"></i>
+        </div>
+    </div>
+    <div class="form-container">
+        <h1>Personal Information</h1>
+
+        <form id="multi-step-form">
+            <br><br>
+            <!-- Page 1 -->
+            <div class="page active" id="page-1">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="phone">Phone:</label>
+                <div class="phone-input">
+                    <!-- <select id="country-code" name="country-code" required></select> -->
+                    <!-- <input type="tel" id="phone" name="phone" pattern="\d{7,15}" required > -->
+                    <input type="tel" id="phone" name="phone" 
+                    required pattern="[0-9]{7,15}" 
+                    title="Please enter a valid phone number (7 to 15 digits)">
+             <small id="phone-error" style="color: red; display: none;">Invalid phone number.</small>
+                </div>
+
+                <label for="dob">Date of Birth</label>
+                <input type="date" id="dob" name="dob">
+
+                <label for="age">Age</label>
+                <input type="age" id="age" name="age">
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" readonly>
+
+
+                <label>Gender</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="gender" value="male" > Male</label>
+                    <label><input type="radio" name="gender" value="female"> Female</label>
+                    <label><input type="radio" name="gender" value="other"> Other</label>
+                </div>
+                <br><br>
+                <div class="form-navigation">
+                    <button type="button" onclick="nextPage()">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 2 -->
+            <div class="page" id="page-2">
+
+                <label for="city">City</label>
+                <input type="text" id="city" name="city" >
+
+                <label for="state">State/Region/Province</label>
+                <input type="text" id="state" name="state" >
+
+
+                <label for="country">Country</label>
+                <select id="country" name="country" required>
+                    <option value="">Select...</option>
+                    <option value="us">United States</option>
+                    <option value="ca">Canada</option>
+                    <option value="uk">United Kingdom</option>
+                    <option value="in">India</option>
+                    <option value="au">Australia</option>
+                </select>
+
+                <div class="form-navigation">
+                    <button type="button" onclick="prevPage()">Back</button>
+                    <button type="button" onclick="nextPage()">Next</button>
+                </div>
+            </div>
+
+            <!-- Page 3 -->
+            <div class="page" id="page-3">
+                <label for="education-level">Highest Level of Education</label>
+                <input type="text" id="education-level" name="education-level" >
+
+                <div class="form-navigation">
+                    <button type="button" onclick="prevPage()">Back</button>
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        // Retrieve email from localStorage
+        const storedEmail = localStorage.getItem("userEmail");
+
+        if (storedEmail) {
+            document.getElementById("email").value = storedEmail; // Auto-fill email field
+            localStorage.removeItem("userEmail"); // Remove it to prevent reusing after sign-out
+        }
+    });
+
+        const pages = document.querySelectorAll('.page');
+        let currentPage = 0;
+
+        function showPage(pageIndex) {
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index === pageIndex);
+            });
+        }
+
+        function nextPage() {
+            if (currentPage < pages.length - 1) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function prevPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+        document.getElementById("multi-step-form").addEventListener("submit", async function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const phoneInput = document.getElementById("phone");
+            const phoneError = document.getElementById("phone-error");
+            const phonePattern = /^[0-9]{7,15}$/;
+
+            if (!phonePattern.test(phoneInput.value.trim())) {
+                phoneError.style.display = "block";
+                return; // Stop submission
+            } else {
+                phoneError.style.display = "none";
+            }
+
+            
+            const formData = {
+                name: document.getElementById("name").value,
+                email: document.getElementById("email").value,
+                phone: document.getElementById("phone").value,
+                dob: document.getElementById("dob").value,
+                age: document.getElementById("age").value,
+                gender: document.querySelector('input[name="gender"]:checked')?.value || "",
+                city: document.getElementById("city").value,
+                state: document.getElementById("state").value,
+                country: document.getElementById("country").value,
+                educationLevel: document.getElementById("education-level").value,
+            };
+
+            try {
+                const response = await fetch("http://localhost:3000/submit", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(formData),
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    alert("Form submitted successfully!");
+                    localStorage.setItem("userEmail", formData.email); // Store email for reference
+                    localStorage.setItem("userName", formData.name); // ✅ Store user name
+                    window.location.href = "page2.html"; // Redirect to next page
+                } else {
+                    alert("Error: " + result.error);
+                }
+            } catch (error) {
+                console.error("Failed to submit data:", error);
+                alert("Failed to submit data.");
+            }
+        });
+    </script>
+
+</body>
+</html>
